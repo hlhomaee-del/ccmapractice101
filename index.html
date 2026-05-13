@@ -25,6 +25,500 @@ main{padding:28px;max-width:1280px;width:100%;margin:0 auto} .section{display:no
 .flow{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:12px;margin-bottom:14px} .flow-step{border-radius:18px;padding:14px;min-height:132px;cursor:pointer;box-shadow:0 8px 24px rgba(16,33,63,.1);transition:.2s;border:2px solid rgba(255,255,255,.9)} .flow-step:nth-child(5n+1){background:linear-gradient(135deg,#fff4bc,#feff22)} .flow-step:nth-child(5n+2){background:linear-gradient(135deg,#99edc3,#3ded97)} .flow-step:nth-child(5n+3){background:linear-gradient(135deg,#70d6ff,#0047ab);color:white} .flow-step:nth-child(5n+4){background:linear-gradient(135deg,#c8a2c8,#ff1493);color:white} .flow-step:nth-child(5n+5){background:linear-gradient(135deg,#ffad42,#ff5c73);color:white} .flow-step.active{outline:4px solid var(--navy);transform:translateY(-6px) scale(1.02)} textarea.report-input{width:100%;min-height:80px;border:0;border-radius:16px;padding:13px;background:#fff;box-shadow:0 8px 22px rgba(16,33,63,.08);font:inherit;margin-bottom:10px} .report-box{white-space:pre-wrap;background:#fff;border-radius:20px;padding:18px;box-shadow:var(--shadow);border:1px solid rgba(16,33,63,.08)} .student-print-header{display:block;margin:0 0 18px;padding:14px 18px;border-radius:18px;background:linear-gradient(135deg,rgba(219,234,254,.92),rgba(224,242,254,.82));border:1px solid rgba(37,99,235,.18);color:#0b2e73;font-weight:950;box-shadow:0 10px 24px rgba(16,33,63,.08)} .site-credit{margin-top:60px;padding:26px 30px;border-radius:26px 26px 0 0;background:linear-gradient(135deg,rgba(255,255,255,.97),rgba(239,246,255,.96),rgba(240,253,250,.9));border-top:5px solid #1d4ed8;color:#12265a;font-weight:800;line-height:1.65;text-align:center;box-shadow:0 18px 45px rgba(16,33,63,.12)} .toast{position:fixed;right:24px;bottom:24px;background:var(--navy);color:#fff;padding:14px 18px;border-radius:18px;box-shadow:var(--shadow);display:none;z-index:9999;font-weight:900} .toast.show{display:block;animation:fadeSlide .3s}
 @media(max-width:980px){.app-shell{grid-template-columns:1fr}.sidebar{position:relative;height:auto}main{padding:16px}.flash-layout,.grid.cols-3,.grid.cols-2{grid-template-columns:1fr}.flashcard{height:76vh;min-height:560px}.flow{grid-template-columns:1fr}.test-top{grid-template-columns:1fr}}
 @media print{body{background:#fff;color:#000}.sidebar,.top-actions,.toolbar,.btn,.utility,.nav-btn,.toast,.no-print{display:none!important}.app-shell{display:block}main{max-width:100%;padding:0}.student-print-header{display:block!important;border:2px solid #111;background:#f3f7ff!important;color:#000!important;margin-bottom:16px;page-break-after:avoid}.section{display:block!important;page-break-after:always;animation:none}.card,.hero,.flash-face,.question-card,.test-shell,.report-box{box-shadow:none;border:1px solid #ccc;background:#fff}.hero{min-height:auto}.hero:before,.bg-orb{display:none}.flash-layout{display:block}.flashcard{transform:none!important;min-height:auto}.flash-face{position:relative;display:block;transform:none!important;margin-bottom:12px;page-break-inside:avoid}.flash-list{display:none}.feedback{display:block!important}}
+
+/* === Memory Labs / developmental psychology additions === */
+.memory-toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 18px}
+.memory-tab{border:0;border-radius:999px;padding:11px 15px;font-weight:900;cursor:pointer;color:#10213f;background:rgba(255,255,255,.88);box-shadow:0 10px 22px rgba(16,33,63,.12);transition:.2s}
+.memory-tab:hover,.memory-tab.active{transform:translateY(-2px);background:linear-gradient(135deg,#ffffff,#e8f7ff)}
+.memory-panel{display:none;animation:fadeSlide .35s ease}
+.memory-panel.active{display:block}
+.pyramid-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:14px}
+.pyramid-level{position:relative;cursor:pointer;perspective:1200px;width:100%;max-width:760px}
+.pyramid-level .memory-flip{position:relative;min-height:92px;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.2,.75,.2,1)}
+.pyramid-level.flipped .memory-flip{transform:rotateY(180deg)}
+.pyramid-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:14px 16px;border-radius:18px;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 14px 30px rgba(16,33,63,.14);border:2px solid rgba(255,255,255,.8)}
+.pyramid-back{transform:rotateY(180deg)}
+.pyramid-level.level-1{max-width:280px}.pyramid-level.level-2{max-width:390px}.pyramid-level.level-3{max-width:510px}.pyramid-level.level-4{max-width:635px}.pyramid-level.level-5{max-width:760px}
+.cloud-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:14px}
+.cloud-card{position:relative;cursor:pointer;perspective:1200px;min-height:180px}
+.cloud-card .memory-flip{position:relative;min-height:180px;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.2,.75,.2,1)}
+.cloud-card.flipped .memory-flip{transform:rotateY(180deg)}
+.cloud-shape{border-radius:44% 56% 53% 47% / 41% 39% 61% 59%}
+.cloud-shape::before,.cloud-shape::after{content:"";position:absolute;border-radius:50%;background:inherit;z-index:-1}
+.cloud-shape::before{width:62px;height:62px;left:22px;top:-16px}.cloud-shape::after{width:84px;height:84px;right:16px;top:-24px}
+.mini-note{display:inline-block;background:rgba(255,255,255,.86);color:#10213f;padding:6px 10px;border-radius:999px;font-weight:900;font-size:12px;margin-top:8px}
+.milestone-track{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:14px}
+.milestone-card,.schedule-card{border-radius:24px;padding:18px;box-shadow:0 14px 30px rgba(16,33,63,.14);border:2px solid rgba(255,255,255,.82);min-height:220px;background:linear-gradient(135deg,rgba(255,255,255,.94),rgba(255,255,255,.72))}
+.milestone-card h4,.schedule-card h4{margin:0 0 8px;color:#10213f;font-size:22px}
+.order-chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.order-chip{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:8px 12px;font-weight:900;background:rgba(255,255,255,.88);box-shadow:0 8px 18px rgba(16,33,63,.11)}
+.erikson-chart{display:grid;gap:14px;margin-top:14px}
+.erikson-row{display:grid;grid-template-columns:130px 1.2fr 1.1fr 1.2fr;gap:12px;align-items:stretch}
+.erikson-cell{border-radius:20px;padding:14px 16px;box-shadow:0 12px 26px rgba(16,33,63,.12);background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.84)}
+.schedule-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:14px}
+.schedule-shape{position:relative;overflow:hidden}
+.schedule-shape::after{content:'';position:absolute;right:-16px;bottom:-18px;width:84px;height:84px;background:rgba(255,255,255,.22);border-radius:28px;transform:rotate(20deg)}
+.color-chip{display:inline-block;width:16px;height:16px;border-radius:50%;box-shadow:0 5px 10px rgba(16,33,63,.16);vertical-align:middle;margin-right:7px}
+@media(max-width:980px){.erikson-row{grid-template-columns:1fr}.pyramid-level{max-width:100%!important}}
+
+
+/* === Memory Labs brightness + stronger clickability upgrade === */
+.memory-toolbar{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr))!important;
+  gap:16px!important;
+  margin:20px 0 24px!important;
+}
+.memory-tab{
+  min-height:86px!important;
+  border-radius:26px!important;
+  padding:18px 18px!important;
+  font-size:17px!important;
+  line-height:1.15!important;
+  font-weight:1000!important;
+  color:#09203f!important;
+  background:linear-gradient(135deg,#24f6fc,#00a9c0)!important;
+  border:3px solid rgba(255,255,255,.86)!important;
+  box-shadow:0 18px 0 rgba(12,50,88,.18),0 24px 42px rgba(16,33,63,.22)!important;
+  transform:translateY(0);
+  position:relative;
+  overflow:hidden;
+}
+.memory-tab:nth-child(2){background:linear-gradient(135deg,#ff2534,#ff8a00)!important;color:#fff!important}
+.memory-tab:nth-child(3){background:linear-gradient(135deg,#fff504,#24f6fc)!important;color:#10213f!important}
+.memory-tab:nth-child(4){background:linear-gradient(135deg,#ff48c7,#ff2534)!important;color:#fff!important}
+.memory-tab:nth-child(5){background:linear-gradient(135deg,#23c704,#00d5a3)!important;color:#fff!important}
+.memory-tab::before{
+  content:"👆 CLICK";
+  position:absolute;
+  right:12px;
+  top:10px;
+  font-size:10px;
+  letter-spacing:.7px;
+  padding:5px 8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.82);
+  color:#10213f;
+  box-shadow:0 8px 16px rgba(16,33,63,.16);
+}
+.memory-tab::after{
+  content:"";
+  position:absolute;
+  inset:-30%;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.42),transparent 65%);
+  transform:translateX(-70%) rotate(10deg);
+  animation:shineSweep 4s ease-in-out infinite;
+}
+.memory-tab:hover,.memory-tab.active{
+  transform:translateY(-7px) scale(1.02)!important;
+  box-shadow:0 23px 0 rgba(12,50,88,.20),0 32px 58px rgba(16,33,63,.28)!important;
+  outline:4px solid rgba(255,255,255,.8);
+}
+.memory-tab.active{
+  animation:tabPulse 1.8s ease-in-out infinite;
+}
+@keyframes shineSweep{0%,45%{transform:translateX(-70%) rotate(10deg)}75%,100%{transform:translateX(90%) rotate(10deg)}}
+@keyframes tabPulse{0%,100%{filter:saturate(1)}50%{filter:saturate(1.35) brightness(1.05)}}
+.click-instruction{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 18px;
+  margin:12px 0 18px;
+  border-radius:22px;
+  background:linear-gradient(135deg,#fff504,#24f6fc,#ff48c7);
+  color:#071a33;
+  font-weight:1000;
+  box-shadow:0 16px 34px rgba(16,33,63,.18);
+  border:3px solid rgba(255,255,255,.85);
+}
+.click-instruction .hand{
+  width:44px;height:44px;border-radius:50%;
+  display:grid;place-items:center;
+  background:white;
+  box-shadow:0 9px 18px rgba(16,33,63,.18);
+  animation:tapBounce 1.15s ease-in-out infinite;
+}
+@keyframes tapBounce{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-6px) scale(1.08)}}
+.pyramid-level .memory-flip{min-height:108px!important}
+.pyramid-face{
+  font-size:16px;
+  border:4px solid rgba(255,255,255,.9)!important;
+  box-shadow:0 18px 0 rgba(16,33,63,.12),0 24px 42px rgba(16,33,63,.20)!important;
+}
+.pyramid-level:hover .memory-flip,.cloud-card:hover .memory-flip{
+  transform:translateY(-7px) scale(1.015);
+}
+.pyramid-level.flipped:hover .memory-flip,.cloud-card.flipped:hover .memory-flip{
+  transform:rotateY(180deg) translateY(-7px) scale(1.015);
+}
+.cloud-card{min-height:230px!important}
+.cloud-card .memory-flip{min-height:230px!important}
+.cloud-grid{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))!important;gap:24px!important}
+.cloud-shape{
+  border-radius:34px 48px 42px 34px!important;
+  min-height:230px;
+}
+.milestone-card.flip-card,
+.schedule-card.flip-card{
+  cursor:pointer;
+  perspective:1200px;
+  padding:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  border:0!important;
+  min-height:285px!important;
+}
+.flip-card .memory-flip{
+  position:relative;
+  min-height:285px;
+  transform-style:preserve-3d;
+  transition:transform .85s cubic-bezier(.2,.75,.2,1);
+}
+.flip-card.flipped .memory-flip{transform:rotateY(180deg)}
+.flip-card:hover .memory-flip{transform:translateY(-7px) scale(1.015)}
+.flip-card.flipped:hover .memory-flip{transform:rotateY(180deg) translateY(-7px) scale(1.015)}
+.flip-face{
+  position:absolute;inset:0;
+  border-radius:28px;
+  padding:20px;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  border:4px solid rgba(255,255,255,.88);
+  box-shadow:0 18px 0 rgba(16,33,63,.13),0 26px 46px rgba(16,33,63,.22);
+  overflow:auto;
+}
+.flip-back{transform:rotateY(180deg);background:linear-gradient(135deg,#ffffff,#eaffff)!important}
+.big-memory-icon{
+  font-size:38px;
+  width:66px;height:66px;
+  display:grid;place-items:center;
+  border-radius:24px;
+  background:rgba(255,255,255,.86);
+  box-shadow:0 12px 24px rgba(16,33,63,.16);
+  margin-bottom:10px;
+}
+.memory-panel h3{
+  font-size:32px;
+  color:#10213f;
+  margin-bottom:8px;
+}
+.order-chip{
+  border:2px solid rgba(255,255,255,.92)!important;
+  background:rgba(255,255,255,.92)!important;
+  color:#10213f!important;
+  box-shadow:0 10px 18px rgba(16,33,63,.13)!important;
+}
+.erikson-row{transition:.25s}
+.erikson-row:hover{transform:translateX(6px) scale(1.01)}
+.erikson-cell{border:3px solid rgba(255,255,255,.88)!important}
+.memory-mini-practice{
+  margin-top:18px;
+  padding:18px;
+  border-radius:26px;
+  background:linear-gradient(135deg,#002c3e,#005d3f);
+  color:#fff;
+  box-shadow:0 18px 38px rgba(16,33,63,.18);
+}
+.memory-mini-practice button{
+  margin:7px;
+  border:0;
+  border-radius:999px;
+  padding:10px 14px;
+  font-weight:900;
+  cursor:pointer;
+  background:white;
+  color:#10213f;
+}
+
+
+/* Equalize answer choice buttons visually so length is less of a clue */
+.flash-back .option,
+.question-card .option{
+  min-height:58px;
+  display:flex!important;
+  align-items:center;
+  line-height:1.35;
+}
+.flash-back .option{
+  font-size:15.5px;
+}
+
+
+/* Erikson full-row color-family styling */
+.erikson-row .stage-cell{
+  background:linear-gradient(135deg,var(--rowStrong),var(--rowSoft))!important;
+}
+.erikson-row .conflict-cell{
+  background:linear-gradient(135deg,var(--rowSoft),rgba(255,255,255,.96))!important;
+  border-left:8px solid var(--rowStrong)!important;
+}
+.erikson-row .positive-cell{
+  background:linear-gradient(135deg,rgba(255,255,255,.94),var(--rowSoft))!important;
+  border-left:8px solid color-mix(in srgb, var(--rowStrong) 70%, white)!important;
+}
+.erikson-row .risk-cell{
+  background:linear-gradient(135deg,color-mix(in srgb, var(--rowSoft) 70%, white),rgba(255,255,255,.95))!important;
+  border-left:8px solid color-mix(in srgb, var(--rowStrong) 50%, white)!important;
+}
+
+
+/* === Connected tab system for Memory Labs === */
+.memory-tabs-shell{
+  margin:20px 0 0;
+  border-radius:32px;
+  overflow:hidden;
+  background:rgba(255,255,255,.72);
+  border:3px solid rgba(255,255,255,.9);
+  box-shadow:0 22px 48px rgba(16,33,63,.16);
+}
+.memory-toolbar{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(140px,1fr))!important;
+  gap:0!important;
+  margin:0!important;
+  padding:0!important;
+  background:linear-gradient(135deg,#10213f,#007AC0);
+  border-bottom:0!important;
+}
+.memory-tab{
+  min-height:96px!important;
+  border-radius:0!important;
+  padding:18px 14px 16px!important;
+  font-size:15.5px!important;
+  box-shadow:none!important;
+  border:0!important;
+  border-right:2px solid rgba(255,255,255,.45)!important;
+  outline:none!important;
+  transform:none!important;
+  position:relative;
+  isolation:isolate;
+}
+.memory-tab:last-child{border-right:0!important}
+.memory-tab:hover{
+  transform:translateY(-3px)!important;
+  box-shadow:inset 0 -10px 0 rgba(255,255,255,.22)!important;
+}
+.memory-tab.active{
+  transform:translateY(0)!important;
+  box-shadow:0 -8px 0 rgba(255,255,255,.35) inset, 0 18px 30px rgba(16,33,63,.16)!important;
+  z-index:4;
+}
+.memory-tab.active::before{
+  content:"ACTIVE TAB";
+  background:#fff!important;
+  color:#10213f!important;
+}
+.memory-tab::before{
+  content:"CLICK TAB";
+  right:50%!important;
+  transform:translateX(50%);
+  top:8px!important;
+  font-size:9px!important;
+  background:rgba(255,255,255,.88)!important;
+}
+.memory-tab::after{
+  animation:none!important;
+  background:none!important;
+}
+.memory-tab .tab-title{
+  display:block;
+  margin-top:22px;
+  font-size:16px;
+}
+.memory-tab .tab-icon{
+  display:block;
+  font-size:25px;
+  margin-bottom:4px;
+}
+.memory-panel{
+  padding:26px;
+  border-radius:0 0 32px 32px;
+  border-top:6px solid var(--activeTabColor,#24F6FC);
+  background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(238,250,255,.92));
+  box-shadow:inset 0 16px 30px rgba(16,33,63,.06);
+  min-height:560px;
+}
+.memory-panel.active{
+  display:block;
+  animation:tabRollIn .45s ease;
+}
+@keyframes tabRollIn{
+  from{opacity:0;transform:translateY(-16px) scale(.985)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.memory-panel-header{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:18px 20px;
+  margin-bottom:18px;
+  border-radius:26px;
+  background:linear-gradient(135deg,var(--panelStrong,#24F6FC),var(--panelSoft,#E8FFFF));
+  color:#10213f;
+  border:3px solid rgba(255,255,255,.9);
+  box-shadow:0 16px 34px rgba(16,33,63,.14);
+}
+.memory-panel-header .panel-icon{
+  width:62px;height:62px;
+  display:grid;place-items:center;
+  border-radius:22px;
+  background:rgba(255,255,255,.9);
+  box-shadow:0 12px 24px rgba(16,33,63,.16);
+  font-size:32px;
+}
+.memory-panel-header h3{
+  margin:0;
+  font-size:31px;
+  line-height:1.05;
+}
+.memory-panel-header p{
+  margin:6px 0 0;
+  font-weight:850;
+}
+.click-instruction{
+  margin:0 0 20px!important;
+}
+@media(max-width:980px){
+  .memory-toolbar{grid-template-columns:1fr!important}
+  .memory-tab{border-right:0!important;border-bottom:2px solid rgba(255,255,255,.45)!important;min-height:74px!important}
+  .memory-tab .tab-title{margin-top:18px}
+  .memory-panel{padding:16px;min-height:auto}
+  .memory-panel-header{align-items:flex-start}
+}
+
+
+/* === Memory Lab tab/content divider + readability adjustments === */
+.memory-tabs-shell{
+  position:relative;
+}
+.memory-toolbar{
+  border-bottom:10px solid #10213f!important;
+  box-shadow:0 14px 0 rgba(255,255,255,.92), 0 20px 34px rgba(16,33,63,.18)!important;
+}
+.memory-toolbar::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-10px;
+  height:10px;
+  background:linear-gradient(90deg,#24F6FC,#FFF504,#FF2534,#FE47CF,#23C704);
+  z-index:5;
+}
+.memory-panel{
+  margin-top:10px!important;
+  border-top:8px solid var(--activeTabColor,#24F6FC)!important;
+}
+.memory-panel::before{
+  content:"Selected memory lab content";
+  display:block;
+  width:max-content;
+  max-width:100%;
+  margin:-18px 0 16px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:#10213f;
+  color:#fff;
+  font-weight:1000;
+  font-size:12px;
+  letter-spacing:.4px;
+  box-shadow:0 10px 22px rgba(16,33,63,.20);
+}
+.memory-tabs-shell > .click-instruction,
+section#memorylabs > .card > .click-instruction,
+#memorylabs .card > .click-instruction:first-child{
+  background:linear-gradient(135deg,#10213f,#0b2e73)!important;
+  color:#fff!important;
+  border:3px solid rgba(255,255,255,.78)!important;
+}
+.memory-tabs-shell > .click-instruction .hand,
+section#memorylabs > .card > .click-instruction .hand,
+#memorylabs .card > .click-instruction:first-child .hand{
+  background:#fff!important;
+  color:#10213f!important;
+}
+.memory-tabs-shell > .click-instruction b,
+section#memorylabs > .card > .click-instruction b,
+#memorylabs .card > .click-instruction:first-child b{
+  color:#fff!important;
+}
+#memory-milestones .milestone-track{
+  grid-template-columns:repeat(auto-fit,minmax(360px,1fr))!important;
+  gap:24px!important;
+  align-items:stretch!important;
+}
+#memory-milestones .milestone-card.flip-card{
+  min-height:410px!important;
+}
+#memory-milestones .flip-card .memory-flip{
+  min-height:410px!important;
+}
+#memory-milestones .flip-face{
+  overflow:visible!important;
+  min-height:410px!important;
+  padding:24px!important;
+}
+#memory-milestones .order-chip-row{
+  gap:10px!important;
+}
+#memory-milestones .order-chip{
+  padding:10px 13px!important;
+  font-size:14px!important;
+  line-height:1.2!important;
+}
+#memory-milestones .flip-back p{
+  font-size:16px!important;
+  line-height:1.5!important;
+}
+@media(max-width:980px){
+  #memory-milestones .milestone-track{
+    grid-template-columns:1fr!important;
+  }
+  #memory-milestones .milestone-card.flip-card,
+  #memory-milestones .flip-card .memory-flip,
+  #memory-milestones .flip-face{
+    min-height:460px!important;
+  }
+}
+
+
+/* Scheduling cards: wider, longer, no internal scrolling */
+#memory-scheduling .schedule-grid{
+  grid-template-columns:repeat(auto-fit,minmax(380px,1fr))!important;
+  gap:26px!important;
+  align-items:stretch!important;
+}
+#memory-scheduling .schedule-card.flip-card{
+  min-height:390px!important;
+}
+#memory-scheduling .flip-card .memory-flip{
+  min-height:390px!important;
+}
+#memory-scheduling .flip-face{
+  min-height:390px!important;
+  overflow:visible!important;
+  padding:24px!important;
+}
+#memory-scheduling .flip-back p{
+  font-size:16px!important;
+  line-height:1.48!important;
+}
+#memory-scheduling .order-chip{
+  padding:10px 13px!important;
+  line-height:1.2!important;
+}
+@media(max-width:980px){
+  #memory-scheduling .schedule-grid{
+    grid-template-columns:1fr!important;
+  }
+  #memory-scheduling .schedule-card.flip-card,
+  #memory-scheduling .flip-card .memory-flip,
+  #memory-scheduling .flip-face{
+    min-height:455px!important;
+  }
+}
+
 </style>
 </head>
 <body data-section="welcome">
@@ -38,6 +532,7 @@ main{padding:28px;max-width:1280px;width:100%;margin:0 auto} .section{display:no
   <button class="nav-btn" data-target="practice" onclick="showSection('practice')">🧩 Practice</button>
   <button class="nav-btn" data-target="challenge" onclick="showSection('challenge')">⏱️ Challenge</button>
   <button class="nav-btn" data-target="diagrams" onclick="showSection('diagrams')">🗺️ Diagrams</button>
+  <button class="nav-btn" data-target="memorylabs" onclick="showSection('memorylabs')">🧠 Memory Labs</button>
   <button class="nav-btn" data-target="analytics" onclick="showSection('analytics')">📈 Analytics</button>
   <button class="nav-btn" data-target="print" onclick="showSection('print')">🖨️ Print / Report</button>
   <div class="side-card"><label>Student name</label><input id="studentName" placeholder="Type name"><label>Collect-to-study box</label><div id="collectBox" class="study-list"></div><div class="top-actions"><button class="utility" onclick="resetAll()">Reset</button><button class="utility" onclick="window.print()">Print/PDF</button></div></div>
@@ -45,13 +540,14 @@ main{padding:28px;max-width:1280px;width:100%;margin:0 auto} .section{display:no
 <main>
 <div class="student-print-header"><div class="student-name-line">Student: <span id="printStudentName">________________</span></div><div class="batch-line">CCMA Clinical Medical Assistant Review — Flashcards, Practice, Challenge, Analytics, Reflection</div></div>
 <section id="welcome" class="section active">
-  <div class="hero"><div><span class="kicker">CCMA success system • one concept expands into the full testing radius</span><h2>Think like a medical assistant, not a memorizer.</h2><p>This platform turns CCMA-style questions into concept maps: records, law and ethics, communication, pharmacology, injections, ECG, respiratory care, infection control, nutrition, scheduling, medical history, coding, and emergency response.</p><p>Use the flashcards first, then practice one question at a time. This version contains 140 practice/challenge questions and 40 concept flashcards. The blue map shows where you are, green shows correct, red shows missed, and the study box lets you collect weak topics for later review.</p><div class="content-note"><strong>Instructional design by Hilary Homaii.</strong> This student-learning platform was developed for educational review using CMA/CCMA test-plan topics and publicly available study resources as general content guides. All teaching structure, explanations, activities, questions, rationales, and instructional sequencing were independently designed/adapted for classroom use.</div><div class="cta-row"><button class="btn" onclick="showSection('flashcards')">Start Flashcards</button><button class="btn secondary" onclick="showSection('practice')">Start Practice</button><button class="btn ghost" onclick="showSection('challenge')">Enter Challenge</button></div></div></div>
+  <div class="hero"><div><span class="kicker">CCMA success system • one concept expands into the full testing radius</span><h2>Think like a medical assistant.</h2><p>This platform turns CCMA-style questions into concept maps: records, law and ethics, communication, pharmacology, injections, ECG, respiratory care, infection control, nutrition, scheduling, medical history, coding, and emergency response.</p><p>Use the flashcards first, then practice one question at a time. This version contains 166 practice/challenge questions and 66 concept flashcards, including new developmental-psychology and scheduling memory labs. The blue map shows where you are, green shows correct, red shows missed, and the study box lets you collect weak topics for later review.</p><div class="content-note"><strong>Instructional design by Hilary Homaii.</strong> This student-learning platform was developed for educational review using CMA/CCMA test-plan topics and publicly available study resources as general content guides. All teaching structure, explanations, activities, questions, rationales, and instructional sequencing were independently designed/adapted for classroom use.</div><div class="cta-row"><button class="btn" onclick="showSection('flashcards')">Start Flashcards</button><button class="btn secondary" onclick="showSection('practice')">Start Practice</button><button class="btn ghost" onclick="showSection('challenge')">Enter Challenge</button><button class="btn warn" onclick="showSection('memorylabs')">Open Memory Labs</button></div></div></div>
 </section>
 <section id="dashboard" class="section"><div class="section-title"><h2>Learning Dashboard</h2><button class="btn small" onclick="showSection('practice')">Start Practice</button></div><div class="grid cols-3" id="moduleCards"></div></section>
 <section id="flashcards" class="section"><div class="section-title"><h2>Animated Concept Flashcards</h2><div><span id="flashCounter" class="badge"></span></div></div><div class="flash-layout"><div><div class="flash-scene"><div id="flashcard" class="flashcard"></div></div><div class="toolbar no-print"><button class="btn secondary" onclick="prevFlash()">Back</button><button class="btn" onclick="flipFlash()">Flip Card</button><button class="btn secondary" onclick="nextFlash()">Next</button><button class="btn good" onclick="markUnderstood()">I understand this</button><button class="btn warn" onclick="toggleCollectFlash()">Collect to Study</button></div></div><div class="card"><h3 style="margin-top:0;color:var(--navy)">Flashcard Map</h3><div id="flashList" class="flash-list"></div></div></div></section>
 <section id="practice" class="section"><div class="section-title"><h2>Practice Mode</h2><span class="badge purple">One question at a time + full rationale</span></div><div class="test-shell"><div class="review-legend" aria-label="Question status legend"><span class="review-key"><span class="legend-dot unanswered" aria-hidden="true"></span>Unanswered</span><span class="review-key"><span class="legend-dot current" aria-hidden="true"></span>Current</span><span class="review-key"><span class="legend-dot correct" aria-hidden="true"></span>Correct</span><span class="review-key"><span class="legend-dot missed" aria-hidden="true"></span>Missed</span></div><div class="review-grid" id="practiceMap"></div><div id="practiceQuestion"></div><div class="toolbar no-print"><button class="btn secondary" onclick="prevPractice()">Previous</button><button class="btn" onclick="nextPractice()">Next</button><button class="btn warn" onclick="flagCurrent('practice')">Flag</button><button class="btn good" onclick="collectQuestion(currentPractice)">Collect Related Flashcard</button></div></div></section>
 <section id="challenge" class="section"><div class="section-title"><h2>Challenge Test Simulation</h2><span class="badge red">Timed mixed review</span></div><div class="test-shell"><div class="test-top"><div><b>Answer without hints first. Rationale appears after selection.</b></div><div class="timer" id="timer">00:00</div><button class="btn warn" onclick="startChallenge()">Start / Restart</button></div><div class="review-legend" aria-label="Question status legend"><span class="review-key"><span class="legend-dot unanswered" aria-hidden="true"></span>Unanswered</span><span class="review-key"><span class="legend-dot current" aria-hidden="true"></span>Current</span><span class="review-key"><span class="legend-dot correct" aria-hidden="true"></span>Correct</span><span class="review-key"><span class="legend-dot missed" aria-hidden="true"></span>Missed</span></div><div class="review-grid" id="challengeMap"></div><div id="challengeQuestion"></div><div class="toolbar no-print"><button class="btn secondary" onclick="prevChallenge()">Previous</button><button class="btn" onclick="nextChallenge()">Next</button><button class="btn warn" onclick="flagCurrent('challenge')">Flag</button><button class="btn good" onclick="collectQuestion(currentChallenge)">Collect Related Flashcard</button></div></div></section>
 <section id="diagrams" class="section"><div class="section-title"><h2>Interactive Diagrams & Tables</h2><span class="badge purple">Click, reveal, compare</span></div><div class="card"><h3>CCMA Decision Flow: From Patient Clue to Safe Action</h3><p>Click each bright step. The point is to decide which domain controls the question before choosing an answer.</p><div class="flow" id="flow"></div><div id="flowExplain" class="feedback show">Click a step to study it.</div></div><div class="grid cols-2" style="margin-top:18px"><div class="card table-wrap"><h3>Look-Alike Concepts</h3><table class="smart-table" id="compareTable"></table></div><div class="card table-wrap"><h3>High-Yield Numbers</h3><table class="smart-table" id="numberTable"></table></div></div></section>
+<section id="memorylabs" class="section"><div class="section-title"><h2>Memory Labs: Development, Psychology & Scheduling</h2><span class="badge orange">Click the shapes. They flip to teach the testing context.</span></div><div class="card"><div class="click-instruction"><span class="hand">👆</span><span>Click the big raised tabs below. Each tab opens a different memory lab. Then click the cards, clouds, pyramid levels, or flip panels to learn the concept.</span></div><div class="memory-tabs-shell"><div class="memory-toolbar no-print" role="tablist" aria-label="Memory Lab Topics"><button class="memory-tab active" data-memory="maslow" onclick="showMemoryPanel('maslow',this)" role="tab"><span class="tab-icon">🔺</span><span class="tab-title">Maslow Pyramid</span></button><button class="memory-tab" data-memory="grief" onclick="showMemoryPanel('grief',this)" role="tab"><span class="tab-icon">☁️</span><span class="tab-title">Stages of Grief</span></button><button class="memory-tab" data-memory="milestones" onclick="showMemoryPanel('milestones',this)" role="tab"><span class="tab-icon">👶</span><span class="tab-title">Milestones & Puberty</span></button><button class="memory-tab" data-memory="erikson" onclick="showMemoryPanel('erikson',this)" role="tab"><span class="tab-icon">🧠</span><span class="tab-title">Erikson Chart</span></button><button class="memory-tab" data-memory="scheduling" onclick="showMemoryPanel('scheduling',this)" role="tab"><span class="tab-icon">📅</span><span class="tab-title">Scheduling Types</span></button></div><div id="memory-maslow" class="memory-panel active" style="--activeTabColor:#24F6FC;--panelStrong:#24F6FC;--panelSoft:#E8FFFF"><div class="memory-panel-header"><span class="panel-icon">🔺</span><div><h3>Maslow’s Hierarchy of Needs</h3><p>This tab teaches priority levels. It is separate from grief, Erikson, milestones, and scheduling.</p></div></div><div class="click-instruction"><span class="hand">👆</span><span>Click each pyramid level. It will flip and show how that level appears on a test. Remember: <b>bottom needs come first.</b></span></div><div id="maslowPyramid" class="pyramid-wrap"></div></div><div id="memory-grief" class="memory-panel" style="--activeTabColor:#FF2534;--panelStrong:#FF7B6B;--panelSoft:#FFE2D8"><div class="memory-panel-header"><span class="panel-icon">☁️</span><div><h3>Stages of Grief</h3><p>This tab teaches grief-stage language and order. It is not Maslow and not Erikson.</p></div></div><div class="click-instruction"><span class="hand">👆</span><span>Click each bright grief cloud. The front gives the stage; the back shows how a patient might express it on a test. Remember the order: <b>denial → anger → bargaining → depression → acceptance.</b></span></div><div id="griefClouds" class="cloud-grid"></div><div class="card" style="margin-top:16px;background:linear-gradient(135deg,rgba(255,255,255,.92),rgba(255,247,214,.88))"><h4 style="margin:0 0 8px;color:var(--navy)">Quick memory path</h4><div class="order-chip-row"><span class="order-chip">1. Denial</span><span class="order-chip">2. Anger</span><span class="order-chip">3. Bargaining</span><span class="order-chip">4. Depression</span><span class="order-chip">5. Acceptance</span></div></div></div><div id="memory-milestones" class="memory-panel" style="--activeTabColor:#FFF504;--panelStrong:#FFF504;--panelSoft:#F4FFB8"><div class="memory-panel-header"><span class="panel-icon">👶</span><div><h3>Growth, Developmental Milestones & Puberty Order</h3><p>This tab teaches developmental order. It is separate from psychological conflict stages.</p></div></div><div class="click-instruction"><span class="hand">👆</span><span>Click each developmental card. The front gives the order; the back gives the testing trap so students remember what comes first.</span></div><div id="milestoneArea" class="milestone-track"></div></div><div id="memory-erikson" class="memory-panel" style="--activeTabColor:#FE47CF;--panelStrong:#FE47CF;--panelSoft:#FFD6F4"><div class="memory-panel-header"><span class="panel-icon">🧠</span><div><h3>Erik Erikson: Psychosocial Development</h3><p>This tab teaches psychosocial conflicts by age. It is different from grief stages and Maslow priorities.</p></div></div><div class="click-instruction"><span class="hand">👆</span><span>Hover over the chart rows and study the age clue, conflict, and test language. Each row uses one bright color family across the row.</span></div><div id="eriksonChart" class="erikson-chart"></div></div><div id="memory-scheduling" class="memory-panel" style="--activeTabColor:#23C704;--panelStrong:#23C704;--panelSoft:#CFFFCB"><div class="memory-panel-header"><span class="panel-icon">📅</span><div><h3>Scheduling Systems</h3><p>This tab teaches appointment patterns. It belongs to office workflow, not psychology.</p></div></div><div class="click-instruction"><span class="hand">👆</span><span>Click each scheduling card. The front shows the pattern; the back shows the exam clue. Watch for <b>same time</b>, <b>arrival order</b>, <b>catch-up time</b>, and <b>similar visit type</b>.</span></div><div id="scheduleArea" class="schedule-grid"></div></div></div></div></section>
 <section id="analytics" class="section"><div class="section-title"><h2>Performance Analytics</h2><button class="btn small" onclick="generateReport();showSection('print')">Generate Report</button></div><div class="grid cols-2" id="analyticsArea"></div></section>
 <section id="print" class="section"><div class="section-title"><h2>Print / Save as PDF + Copyable Report</h2><button class="btn" onclick="window.print()">Print / Save as PDF</button></div><div class="grid cols-2"><div class="card"><h3>Student Reflection</h3><textarea id="fbEasy" class="report-input" placeholder="What felt easiest?"></textarea><textarea id="fbHard" class="report-input" placeholder="What felt hardest?"></textarea><textarea id="fbConfusing" class="report-input" placeholder="Which questions or topics were confusing?"></textarea><textarea id="fbNext" class="report-input" placeholder="What will you review next?"></textarea><button class="btn good" onclick="copyReport()">Copy Full Report</button></div><div class="card"><h3>Report Preview</h3><div id="reportBox" class="report-box">Generate or copy the report after completing practice.</div></div></div></section>
 <footer class="site-credit"><strong>Instructional design by Hilary Homaii.</strong> All rights reserved.<br><small>Student-facing CCMA review platform designed for applied reasoning, clinical judgment, administrative workflow, and exam readiness.</small></footer>
@@ -64,6 +560,126 @@ const MODULES = {"Law, Ethics & Records": {"count": 1, "cards": ["F1"]}, "Pharma
 const flowSteps = [['Patient clue','What is the patient or document really asking?'],['Domain','Clinical safety, law/ethics, admin workflow, coding, or communication?'],['Rule','Which precise rule controls the safest action?'],['Trap','Which option sounds familiar but does not match the clue?'],['Action','Choose the most professional, safe, documented next step.']];
 const compareRows = [['Tolerance','Same dose works less over time','Do not call it allergy unless immune symptoms appear'],['Allergy','Hives, swelling, wheezing, anaphylaxis','Emergency clues matter'],['Release form','Patient-directed record transfer','Not the same as routine billing'],['Medical necessity','Diagnosis supports service','ICD explains why; CPT/HCPCS explains what'],['Rejected vs denied','Before adjudication vs processed unpaid','Fix rejection; appeal denial only if supported']];
 const numberRows = [['Standard ECG','12 leads'],['Bipolar leads','I, II, III'],['CPR compression rate','100–120/min'],['IM adult gluteal/vastus lateralis','Up to 3 mL'],['Subcutaneous volume','Usually not more than 1 mL'],['Skin-prick maximal reaction','15–20 minutes'],['Additional collection activity','Often after 120 days'],['Low-range peak flow','0–300 range; often children/lower readings']];
+
+const EXTRA_FLASHCARDS = [
+ {id:'F41',category:'Maslow\'s Hierarchy',title:'Physiological Needs Come First',icon:'🔵',accent:'#1aa0e2',accent2:'#8fd8ff',front:'Maslow\'s base level is physiological need. If oxygenation, food, fluids, elimination, rest, pain relief, or temperature regulation are threatened, those needs outrank higher-level concerns.',boxes:[['Core idea','Airway, breathing, circulation, food, fluids, rest, elimination, and basic comfort sit at the bottom of the hierarchy.'],['Test clue','A patient who is hungry, short of breath, bleeding, or in severe pain is usually showing a physiological priority.'],['Common distractor','Students often jump to emotional support when the stem is really about breathing, nutrition, or circulation.'],['Memory shape','Think “survival first, feelings later.”']],q:'A patient is frightened before discharge teaching, but is also wheezing and struggling to speak in full sentences. Which need is the highest Maslow priority?',options:['Restoring effective oxygenation first','Addressing the patient’s fear first','Planning long-term lifestyle goals','Improving the patient’s self-image'],answer:0,why:['Correct — impaired breathing is a physiological need and takes priority in Maslow’s hierarchy.','Incorrect — emotional fear matters, but it does not outrank active breathing difficulty.','Incorrect — long-term growth goals are much higher in the hierarchy.','Incorrect — self-image belongs to esteem needs, not the base level.']},
+ {id:'F42',category:'Maslow\'s Hierarchy',title:'Safety and Security Needs',icon:'🟤',accent:'#9d6a61',accent2:'#d8bab4',front:'After basic survival needs are stable, safety becomes the next major layer. Safety includes protection from injury, predictable routines, shelter, medications, and freedom from immediate danger.',boxes:[['Core idea','Safety includes physical protection, stability, fall prevention, and protection from harm.'],['Test clue','Bed alarms, side rails used appropriately, medication teaching, and infection prevention often fit here.'],['Common distractor','Students sometimes confuse safety with belonging because both can sound supportive.'],['Memory shape','Think “safe before social.”']],q:'A patient has adequate oxygenation and nutrition but is confused and keeps trying to climb out of bed. Which Maslow level should guide the nurse’s first action?',options:['Protection from injury and unsafe falls','Support for the patient’s friendships','Praise to build personal esteem','Exploration of spiritual fulfillment'],answer:0,why:['Correct — preventing injury reflects the safety-and-security level of Maslow.','Incorrect — social support matters, but immediate protection comes first here.','Incorrect — esteem is a higher-order need than safety.','Incorrect — self-actualization or spiritual growth does not outrank injury prevention.']},
+ {id:'F43',category:'Maslow\'s Hierarchy',title:'Love and Belonging Needs',icon:'🟡',accent:'#f8d300',accent2:'#fff0a6',front:'Belonging involves connection, family presence, acceptance, and feeling part of a group. Patients may express this level through loneliness, isolation, or a desire for closeness.',boxes:[['Core idea','Belonging includes affection, friendship, family contact, and a sense of connection.'],['Test clue','Questions may mention isolation, separation from family, homesickness, or desire for peer support.'],['Common distractor','Do not mistake social connection for esteem; esteem is about confidence and value.'],['Memory shape','Think “I need my people.”']],q:'A stable long-term patient repeatedly says, “I miss my family and feel alone here.” Which Maslow level is most directly reflected?',options:['The need for love and belonging','The need for airway stability','The need for self-actualization','The need for external safety'],answer:0,why:['Correct — loneliness and desire for family connection fit the love-and-belonging level.','Incorrect — no immediate physiological issue is described in the stem.','Incorrect — self-actualization concerns purpose and growth, not loneliness.','Incorrect — safety is not the main clue in this statement.']},
+ {id:'F44',category:'Maslow\'s Hierarchy',title:'Esteem Needs',icon:'🟦',accent:'#4db6b3',accent2:'#a7efe4',front:'Esteem involves confidence, independence, respect, achievement, and feeling capable. Many rehabilitation and self-care questions move into this level once survival, safety, and support are stable.',boxes:[['Core idea','Esteem is about confidence, dignity, achievement, and personal value.'],['Test clue','Questions may emphasize independence with care, confidence after illness, or feeling useful again.'],['Common distractor','Belonging = connection; esteem = confidence and self-worth.'],['Memory shape','Think “I can do this myself.”']],q:'A recovering patient is physically stable and says, “I want to dress myself again so I don’t feel helpless.” Which Maslow level best matches this statement?',options:['The need for esteem and competence','The need for immediate survival','The need for emotional attachment','The need for environmental security'],answer:0,why:['Correct — independence and competence point to esteem needs.','Incorrect — no urgent physiological threat is present.','Incorrect — this is about capability more than belonging.','Incorrect — safety is not the main clue here.']},
+ {id:'F45',category:'Maslow\'s Hierarchy',title:'Self-Actualization',icon:'🟩',accent:'#73c27c',accent2:'#b7ebb8',front:'Self-actualization is the highest traditional level. It concerns growth, meaning, creativity, personal purpose, and becoming one’s fullest self after lower needs are stable.',boxes:[['Core idea','Self-actualization concerns purpose, growth, fulfillment, creativity, and reaching one’s potential.'],['Test clue','These questions sound reflective: “Now that I’m better, I want to mentor others” or “I want to pursue a life goal.”'],['Common distractor','Do not place self-actualization above unresolved oxygenation, pain, or safety problems.'],['Memory shape','Think “becoming my fullest self.”']],q:'A patient who is stable and independent says, “I want to use this recovery to help others and live with more purpose.” Which Maslow level is reflected?',options:['The drive toward self-actualization','The need for protection from harm','The need for family attachment','The need for nutritional survival'],answer:0,why:['Correct — purpose, growth, and fulfillment indicate self-actualization.','Incorrect — safety is not the central clue in this statement.','Incorrect — social attachment is a lower level than the goal described.','Incorrect — physiological survival is not the focus here.']},
+ {id:'F46',category:'Stages of Grief',title:'Denial',icon:'🌺',accent:'#ff4f7b',accent2:'#ffc1d0',front:'Denial is often the mind’s first buffer. Patients may say the diagnosis must be wrong, insist nothing is happening, or act as though the loss is not real.',boxes:[['How it sounds','“This cannot be right.” “They must have mixed up my results.”'],['Exam clue','The person rejects or minimizes the reality of the loss or diagnosis.'],['Common trap','Calm denial can be mistaken for acceptance; listen for refusal to believe the reality.'],['Order reminder','Denial usually appears early in the classic grief sequence.']],q:'A patient says, “There is no way this diagnosis is mine; the lab must have switched the chart.” Which grief stage is most consistent?',options:['Denial of the reality of the loss','Anger toward the unfairness involved','Bargaining for a different outcome','Acceptance of the changed situation'],answer:0,why:['Correct — rejecting the reality of the diagnosis is classic denial.','Incorrect — anger would sound more blaming or resentful than disbelieving.','Incorrect — bargaining usually sounds like “if only” or negotiation.','Incorrect — acceptance reflects acknowledgment, not disbelief.']},
+ {id:'F47',category:'Stages of Grief',title:'Anger',icon:'🔥',accent:'#ff7a59',accent2:'#ffc2a7',front:'Anger may be directed at providers, family, fate, or the situation itself. The patient may ask why this happened, become irritable, or blame others.',boxes:[['How it sounds','“Why is this happening to me?” “No one is helping me.”'],['Exam clue','Irritability, resentment, blaming, or hostility after a loss often fits anger.'],['Common trap','Agitation can occur in depression too; anger has more blaming and protest.'],['Order reminder','Anger often follows denial in the classic sequence.']],q:'A patient snaps at staff and says, “Everyone else gets better, so why did this happen to me?” Which stage is most likely?',options:['Anger directed at the loss','Acceptance of the life change','Bargaining for more time','Denial that anything happened'],answer:0,why:['Correct — blaming, resentment, and “why me?” language fit anger.','Incorrect — acceptance does not sound resentful or accusatory.','Incorrect — bargaining uses negotiation language, not protest language.','Incorrect — denial centers on disbelief rather than blame.']},
+ {id:'F48',category:'Stages of Grief',title:'Bargaining',icon:'🌞',accent:'#f2d24d',accent2:'#fff1a3',front:'Bargaining tries to negotiate: with fate, with God, or with the situation. Patients often use “if only,” “what if,” or “I promise” language.',boxes:[['How it sounds','“If I do everything right, maybe this will go away.”'],['Exam clue','Look for negotiation, “if only,” guilt, or attempts to trade behavior for a different outcome.'],['Common trap','Do not confuse bargaining with realistic planning. Bargaining tries to undo reality.'],['Order reminder','Bargaining often sits in the middle of the grief sequence.']],q:'A patient says, “If I follow every rule perfectly, maybe I can undo this and none of it will be real.” Which stage fits best?',options:['Bargaining through negotiation language','Depression with hopeless withdrawal','Acceptance of what has happened','Anger at the staff’s behavior'],answer:0,why:['Correct — the “if I…” structure is a classic bargaining clue.','Incorrect — depression tends to sound heavier and more hopeless, not negotiative.','Incorrect — acceptance acknowledges reality rather than bargaining against it.','Incorrect — anger sounds more blaming than negotiating.']},
+ {id:'F49',category:'Stages of Grief',title:'Depression',icon:'🌿',accent:'#88c425',accent2:'#d7f38c',front:'Depression in grief often looks like sadness, poor motivation, disturbed sleep, low energy, and withdrawal. This is not just disappointment; it is a heavy awareness of loss.',boxes:[['How it sounds','“I don’t feel like doing anything.” “I can’t sleep and nothing seems to matter.”'],['Exam clue','Low motivation, tearfulness, agitation, appetite or sleep changes after a loss often fit depression.'],['Common trap','Do not confuse quiet sadness with denial. Depression accepts the reality but feels its weight.'],['Order reminder','Depression usually comes late in the classic sequence, before acceptance.']],q:'After losing a spouse, a patient has poor sleep, little energy, and no motivation for daily tasks. Which grief stage is most consistent?',options:['Depression linked to the loss','Bargaining for a different outcome','Acceptance with realistic peace','Denial of what took place'],answer:0,why:['Correct — low energy, poor sleep, and loss of motivation fit depression in grief.','Incorrect — bargaining uses negotiation language rather than shutdown and sadness.','Incorrect — acceptance reflects adjustment, not marked low motivation.','Incorrect — denial centers on disbelief, not heavy sadness.']},
+ {id:'F50',category:'Stages of Grief',title:'Acceptance',icon:'🌊',accent:'#39d3c8',accent2:'#aef4ef',front:'Acceptance does not mean happiness. It means the person begins to acknowledge the reality and move forward with it more peacefully.',boxes:[['How it sounds','“I don’t like it, but I know it is real and I can start planning.”'],['Exam clue','The patient is no longer fighting reality and begins practical adjustment.'],['Common trap','Acceptance is not the same as “being over it.” The loss still matters.'],['Order reminder','Acceptance comes last in the classic sequence.']],q:'A patient says, “I wish things were different, but I know this is real and I’m ready to plan the next step.” Which stage is reflected?',options:['Acceptance of the changed reality','Denial that the event occurred','Anger about the unfairness','Bargaining for reversal'],answer:0,why:['Correct — acknowledging reality and planning ahead fit acceptance.','Incorrect — denial would reject the reality of the event.','Incorrect — anger would emphasize blame or protest.','Incorrect — bargaining would use if-only negotiation.']},
+ {id:'F51',category:'Growth & Development Milestones',title:'Infant Gross Motor Sequence',icon:'👶',accent:'#eab08f',accent2:'#fde2d1',front:'Students often need the order of gross motor milestones: head control comes before rolling, sitting comes before crawling, and walking comes after cruising and standing support.',boxes:[['Early order','Head control → rolls over → sits with support → sits alone → crawls → pulls to stand → cruises → walks.'],['Exam clue','If a choice asks what usually comes first, choose the more basic trunk or head control skill.'],['Common trap','Students sometimes place walking far too early.'],['Memory shape','Think “head before hips before steps.”']],q:'Which milestone usually appears before independent walking in a typically developing infant?',options:['Pulling to stand and cruising','Using two-word sentences clearly','Beginning menstrual cycles','Building a stable self-concept'],answer:0,why:['Correct — pulling to stand and cruising generally come before independent walking.','Incorrect — two-word phrases are a language milestone, not a prewalking motor step.','Incorrect — menstruation is a puberty event, not an infant milestone.','Incorrect — stable self-concept is psychosocial, not infant gross motor development.']},
+ {id:'F52',category:'Growth & Development Milestones',title:'Infant Fine Motor and Social Clues',icon:'🧸',accent:'#c9b1bd',accent2:'#eee1e8',front:'Infants develop social and fine-motor signs in a pattern too: social smile comes early, then purposeful grasping, transferring objects, pincer grasp, and increasing stranger awareness.',boxes:[['Key sequence','Social smile early; transfer objects around mid-infancy; pincer grasp later in infancy.'],['Exam clue','If the stem mentions picking up a tiny object with thumb and forefinger, think pincer grasp.'],['Common trap','Do not confuse reflex grasp with purposeful pincer grasp.'],['Memory shape','Think “smile, grasp, transfer, pinch.”']],q:'A parent reports that a 10-month-old picks up cereal pieces neatly with thumb and forefinger. Which milestone is being described?',options:['Development of a pincer grasp','Completion of toilet training','Onset of abstract thought','Achievement of adult role identity'],answer:0,why:['Correct — thumb-and-forefinger pickup describes a pincer grasp.','Incorrect — toilet training belongs much later in toddlerhood.','Incorrect — abstract thought is an adolescent cognitive concept.','Incorrect — adult role identity is not an infant milestone.']},
+ {id:'F53',category:'Growth & Development Milestones',title:'Toddler and Preschool Language',icon:'🗨️',accent:'#a4a7c0',accent2:'#e2e4f0',front:'Language growth is often tested through clues about vocabulary size and sentence length. Toddlers move from single words to two-word phrases; preschoolers expand into fuller sentences and imaginative communication.',boxes:[['Toddler clue','Around 2 years, simple two-word phrases are expected.'],['Preschool clue','Preschoolers tell stories, ask many questions, and use longer sentences.'],['Common trap','Do not assign complex adolescent reasoning to toddlers.'],['Memory shape','Think “single word → two words → sentence stories.”']],q:'Which language pattern best fits a typical toddler rather than a preschool child?',options:['Using short two-word phrases often','Explaining cause and effect clearly','Writing a short paragraph independently','Reasoning with abstract symbolism'],answer:0,why:['Correct — short two-word phrases fit toddler language development.','Incorrect — clear cause-and-effect explanation is more advanced.','Incorrect — paragraph writing is school-age, not toddler.','Incorrect — abstract symbolism is far beyond toddler language ability.']},
+ {id:'F54',category:'Growth & Development Milestones',title:'Female Puberty Order',icon:'🌸',accent:'#6cd6c8',accent2:'#c8f6ef',front:'Female puberty usually starts with breast budding (thelarche), followed by pubic hair growth, a growth spurt, and then menarche later rather than first.',boxes:[['Likely order','Breast budding → pubic hair → growth spurt progression → menarche later.'],['Exam clue','If a question asks what often comes first in girls, think breast development before menstruation.'],['Common trap','Students often place menarche too early.'],['Memory shape','Think “breast before bleeding.”']],q:'Which event usually appears earliest in female puberty?',options:['Breast budding begins first','Menstrual cycles start first','Pelvic width is final first','Adult body odor ends first'],answer:0,why:['Correct — breast budding often begins before later pubertal milestones such as menarche.','Incorrect — menarche usually occurs later, not first.','Incorrect — pelvic widening develops over time and is not the earliest hallmark.','Incorrect — body odor changes can occur, but breast budding is the more classic earliest clue.']},
+ {id:'F55',category:'Growth & Development Milestones',title:'Male Puberty Order',icon:'⚡',accent:'#7ea0cf',accent2:'#d2e2f8',front:'Male puberty often begins with testicular enlargement, then pubic hair growth, penile growth, growth spurt, and later facial hair and deeper voice changes.',boxes:[['Likely order','Testicular enlargement tends to come before later visible secondary-sex characteristics.'],['Exam clue','If the item asks what commonly comes first in boys, choose testicular enlargement over facial hair.'],['Common trap','Students often pick voice change or muscle bulk too early.'],['Memory shape','Think “gonads before beard.”']],q:'Which change usually begins earliest in male puberty?',options:['Testicular enlargement starts first','Facial hair becomes coarse first','Voice deepening starts first','Broad adult musculature appears first'],answer:0,why:['Correct — testicular enlargement is the classic earliest sign of male puberty.','Incorrect — facial hair usually develops later.','Incorrect — voice deepening is later than the earliest pubertal sign.','Incorrect — adult musculature develops later in the sequence.']},
+ {id:'F56',category:'Erikson\'s Psychosocial Stages',title:'Trust vs Mistrust',icon:'🤱',accent:'#f7c09f',accent2:'#fde7d9',front:'In infancy, consistent care supports trust. When basic needs are met reliably, the child learns that the world is safe and caregivers are dependable.',boxes:[['Age range','Infancy.'],['Core conflict','Trust vs mistrust.'],['Test clue','Reliable feeding, comfort, and soothing build trust.'],['Risk if unmet','Inconsistent care can promote mistrust and insecurity.']],q:'Which caregiving pattern most strongly supports Erikson’s stage of trust versus mistrust?',options:['Consistent soothing and reliable care','Strict comparison with sibling success','Pressure to master abstract tasks','Encouragement to form adult identity'],answer:0,why:['Correct — reliable care supports trust in infancy.','Incorrect — sibling comparison is not the central task of infancy.','Incorrect — abstract task mastery is not the infant psychosocial conflict.','Incorrect — adult identity belongs to adolescence, not infancy.']},
+ {id:'F57',category:'Erikson\'s Psychosocial Stages',title:'Autonomy vs Shame and Doubt',icon:'🚽',accent:'#e4c785',accent2:'#f6e7bb',front:'Toddlers test independence. Choices, toilet training, and safe self-direction support autonomy. Excess criticism may create shame and doubt.',boxes:[['Age range','Toddler years.'],['Core conflict','Autonomy vs shame and doubt.'],['Test clue','Questions often mention “I can do it myself,” toilet training, or trying simple choices.'],['Risk if unmet','Overcontrol and ridicule can produce shame and self-doubt.']],q:'A toddler insists on feeding herself and choosing between two shirts. Which Erikson stage is being expressed?',options:['Autonomy versus shame and doubt','Identity versus role confusion','Generativity versus stagnation','Integrity versus despair'],answer:0,why:['Correct — self-direction and independence fit autonomy versus shame and doubt.','Incorrect — identity versus role confusion is an adolescent task.','Incorrect — generativity versus stagnation belongs to middle adulthood.','Incorrect — integrity versus despair belongs to later life.']},
+ {id:'F58',category:'Erikson\'s Psychosocial Stages',title:'Initiative vs Guilt',icon:'🎨',accent:'#9daaad',accent2:'#dde5e6',front:'Preschoolers imagine, pretend, ask “why,” and initiate play. Healthy support builds initiative; excessive punishment can lead to guilt about action and curiosity.',boxes:[['Age range','Preschool years.'],['Core conflict','Initiative vs guilt.'],['Test clue','Pretend play, trying projects, and taking the lead are typical clues.'],['Risk if unmet','Harsh control may create guilt for acting independently.']],q:'A preschool child invents games and constantly asks to help with simple tasks. Which Erikson stage best fits?',options:['Initiative versus guilt','Industry versus inferiority','Trust versus mistrust','Integrity versus despair'],answer:0,why:['Correct — trying new activities and taking initiative fit the preschool psychosocial task.','Incorrect — industry versus inferiority belongs more to the school-age child.','Incorrect — trust versus mistrust belongs to infancy.','Incorrect — integrity versus despair is a later-life task.']},
+ {id:'F59',category:'Erikson\'s Psychosocial Stages',title:'Industry vs Inferiority',icon:'📘',accent:'#67b2c8',accent2:'#c9eef4',front:'School-age children focus on work, skills, and competence. They want to succeed in tasks, school, games, and responsibilities. Repeated failure may produce inferiority.',boxes:[['Age range','School-age years.'],['Core conflict','Industry vs inferiority.'],['Test clue','Homework, projects, skill-building, and wanting to do a job well are common clues.'],['Risk if unmet','Repeated criticism or failure can cause inferiority.']],q:'A school-age child is proud of completing a project and wants recognition for doing it well. Which Erikson stage is highlighted?',options:['Industry versus inferiority','Trust versus mistrust','Autonomy versus shame','Intimacy versus isolation'],answer:0,why:['Correct — skill mastery and pride in accomplishment fit industry versus inferiority.','Incorrect — trust versus mistrust belongs to infancy.','Incorrect — autonomy versus shame belongs to toddlerhood.','Incorrect — intimacy versus isolation belongs to young adulthood.']},
+ {id:'F60',category:'Erikson\'s Psychosocial Stages',title:'Identity vs Role Confusion',icon:'🪞',accent:'#53a6d9',accent2:'#cfeafb',front:'Adolescents ask who they are, what they value, and where they fit. Identity forms through experimenting with roles, beliefs, and social belonging.',boxes:[['Age range','Adolescence.'],['Core conflict','Identity vs role confusion.'],['Test clue','Questions may mention peer groups, future roles, values, and “Who am I?” themes.'],['Risk if unmet','Lack of a stable sense of self may lead to role confusion.']],q:'An adolescent is exploring beliefs, peer groups, and future career roles. Which Erikson stage is central?',options:['Identity versus role confusion','Integrity versus despair','Generativity versus stagnation','Initiative versus guilt'],answer:0,why:['Correct — role exploration and self-definition are central to identity versus role confusion.','Incorrect — integrity versus despair belongs to older adulthood.','Incorrect — generativity versus stagnation belongs to middle adulthood.','Incorrect — initiative versus guilt belongs to preschool years.']},
+ {id:'F61',category:'Scheduling Systems',title:'Wave Scheduling',icon:'📅',accent:'#ef476f',accent2:'#ffd2dd',front:'Wave scheduling places several patients in the same block, commonly at the top of the half hour or hour. They are often seen in the order they arrive.',boxes:[['Core idea','Multiple patients are booked into the same time block.'],['Test clue','If the stem says three or four patients are booked for the same half hour and seen as they arrive, think wave scheduling.'],['Common trap','Do not confuse wave scheduling with stream scheduling, which uses individual appointment times.'],['Memory shape','Think “a wave of patients arrives together.”']],q:'Three patients are booked at 9:00 and are seen in the order they check in. Which system is described?',options:['Wave scheduling across one time block','Stream scheduling by exact sequence','Clustering by procedure type only','Double-entry accounting control'],answer:0,why:['Correct — multiple patients at one time block seen by arrival order describes wave scheduling.','Incorrect — stream scheduling uses more individualized appointment times.','Incorrect — clustering groups similar visit types rather than using the arrival-order clue.','Incorrect — accounting control is unrelated to appointment systems.']},
+ {id:'F62',category:'Scheduling Systems',title:'Modified Wave Scheduling',icon:'🧭',accent:'#f78c6b',accent2:'#ffd9cb',front:'Modified wave scheduling keeps the “wave” idea but spaces some patients within the hour so that catch-up time exists, often leaving the end of the hour lighter.',boxes:[['Core idea','Patients are staggered to create built-in catch-up time.'],['Test clue','If the stem mentions a few patients at the start of the hour and an open period later for catching up, think modified wave.'],['Common trap','Do not confuse it with full wave scheduling where all or most patients pile into the same block.'],['Memory shape','Think “wave, but with breathing room.”']],q:'A provider books several patients early in the hour and leaves room later in the hour to catch up if visits run long. Which scheduling pattern is this?',options:['Modified wave scheduling design','Stream scheduling in a sequence','Open-hour triage scheduling','Clustering by diagnosis only'],answer:0,why:['Correct — built-in catch-up time is a classic modified-wave clue.','Incorrect — stream scheduling does not emphasize catch-up blocks in this way.','Incorrect — open-hour triage is not the scheduling clue described.','Incorrect — clustering focuses on similar visit types, not the catch-up pattern.']},
+ {id:'F63',category:'Scheduling Systems',title:'Stream vs Clustering',icon:'☁️',accent:'#ffd166',accent2:'#fff1b5',front:'Stream scheduling gives patients distinct appointment times. Clustering groups similar kinds of visits together, such as physicals, injections, or procedures.',boxes:[['Stream clue','Each patient has a specific time slot.'],['Clustering clue','Similar visit types are grouped into the same portion of the schedule.'],['Common trap','A question can describe both timing and visit-type grouping; identify which clue controls the answer.'],['Memory shape','Think “stream = sequence; cluster = grouped alike.”']],q:'A clinic books all allergy-shot visits together during one part of the afternoon. Which scheduling strategy is most directly being used?',options:['Clustering by similar visit type','Wave scheduling by arrival order','Modified wave with catch-up','Open-book referral scheduling'],answer:0,why:['Correct — grouping similar appointments together describes clustering.','Incorrect — wave scheduling is defined more by shared time blocks and arrival order.','Incorrect — modified wave emphasizes catch-up spacing, not the similarity of visit types.','Incorrect — referral scheduling is not the key pattern in the stem.']}
+];
+
+const EXTRA_QUESTIONS = [
+ {id:'Q141',topic:'Maslow\'s Hierarchy',difficulty:'Moderate',related:['F41'],stem:'Which patient problem reflects the lowest level of Maslow’s hierarchy and therefore the highest initial priority?',options:['Increasing work of breathing at rest','Feeling left out of a support group','Loss of confidence after surgery','Questioning long-term life purpose'],answer:0,rationales:['Correct — breathing is a physiological survival need and sits at the base of Maslow’s hierarchy.','Incorrect — belonging is important, but it does not outrank a survival-level breathing problem.','Incorrect — confidence reflects esteem, which is higher than physiological need.','Incorrect — long-term purpose fits self-actualization, not the base level.'],trap:'Pick the need linked to survival before the need linked to feeling or meaning.'},
+ {id:'Q142',topic:'Maslow\'s Hierarchy',difficulty:'Moderate',related:['F42'],stem:'A patient is stable but confused and at risk for falling from bed. Which Maslow level most directly guides the first intervention?',options:['Safety and security needs','Love and belonging needs','Esteem-building needs','Self-actualization needs'],answer:0,rationales:['Correct — protecting the patient from immediate injury reflects safety and security.','Incorrect — social connection matters, but fall prevention comes first in this scenario.','Incorrect — confidence-building is not the priority when injury risk is present.','Incorrect — self-actualization is far above the level suggested by this stem.'],trap:'The key clue is injury prevention, not emotional comfort.'},
+ {id:'Q143',topic:'Maslow\'s Hierarchy',difficulty:'Challenging',related:['F43'],stem:'A long-term care resident says, “I just want someone to sit with me; I feel forgotten.” Which need is most clearly expressed?',options:['Belonging and social connection','Immediate oxygenation and survival','Protection from physical danger','Personal esteem through mastery'],answer:0,rationales:['Correct — wanting company and fearing isolation reflect belonging needs.','Incorrect — there is no physiological emergency in the statement.','Incorrect — safety is not the main clue in the resident’s words.','Incorrect — esteem is about worth and competence, not the central wish described here.'],trap:'Do not let a quiet emotional statement distract you from the exact need being named.'},
+ {id:'Q144',topic:'Maslow\'s Hierarchy',difficulty:'Challenging',related:['F44'],stem:'A rehabilitation patient says, “I need to be able to bathe myself again so I stop feeling useless.” Which need is being emphasized?',options:['Esteem through renewed competence','Belonging through social support','Safety through predictable routine','Survival through basic nutrition'],answer:0,rationales:['Correct — the patient is focused on competence, independence, and self-worth.','Incorrect — this statement is not mainly about wanting connection with others.','Incorrect — the emphasis is not injury prevention or routine.','Incorrect — no physiological deficit is driving the statement.'],trap:'Look for confidence and independence language to identify esteem.'},
+ {id:'Q145',topic:'Maslow\'s Hierarchy',difficulty:'Moderate',related:['F45'],stem:'Which statement most strongly reflects self-actualization rather than a lower Maslow level?',options:['“I want to use this experience to grow and help others.”','“I need to stop feeling lonely in this room.”','“I am afraid I might fall tonight.”','“I cannot rest because my pain is severe.”'],answer:0,rationales:['Correct — growth, purpose, and helping others fit self-actualization.','Incorrect — loneliness reflects belonging needs.','Incorrect — fear of falling reflects safety needs.','Incorrect — severe pain reflects physiological needs.'],trap:'Self-actualization sounds like growth, purpose, creativity, or fulfillment.'},
+ {id:'Q146',topic:'Stages of Grief',difficulty:'Moderate',related:['F46'],stem:'Which patient statement best matches denial after receiving bad news?',options:['“The report is wrong, so this cannot be true.”','“Why would anyone let this happen to me?”','“If I change everything, maybe it will disappear.”','“I know this is real, and I am planning ahead.”'],answer:0,rationales:['Correct — disbelief and rejection of reality indicate denial.','Incorrect — this sounds like anger, not denial.','Incorrect — this sounds like bargaining language.','Incorrect — this is closer to acceptance.'],trap:'Denial rejects reality; acceptance acknowledges it.'},
+ {id:'Q147',topic:'Stages of Grief',difficulty:'Moderate',related:['F47'],stem:'Which response most directly illustrates anger in the grief process?',options:['“Why is everyone failing me right now?”','“This diagnosis is not really mine.”','“If I do better, maybe this will reverse.”','“I am sad and have no energy at all.”'],answer:0,rationales:['Correct — resentment and blame point to anger.','Incorrect — disbelief suggests denial.','Incorrect — negotiation language suggests bargaining.','Incorrect — sadness and low energy suggest depression.'],trap:'Listen for blame and protest to identify anger.'},
+ {id:'Q148',topic:'Stages of Grief',difficulty:'Moderate',related:['F48'],stem:'Which patient comment most clearly reflects bargaining?',options:['“If I pray harder, maybe this can still change.”','“This whole thing never happened at all.”','“I feel too hopeless to get out of bed.”','“I am learning to live with what happened.”'],answer:0,rationales:['Correct — “if…” negotiation language is classic bargaining.','Incorrect — rejecting the event points to denial.','Incorrect — hopelessness and low energy point to depression.','Incorrect — living with reality points to acceptance.'],trap:'The word structure often gives bargaining away: if only, maybe, I promise.'},
+ {id:'Q149',topic:'Stages of Grief',difficulty:'Moderate',related:['F49'],stem:'A grieving patient has poor sleep, low motivation, and little interest in daily life. Which stage is most consistent?',options:['Depression after the loss','Anger at the care team','Bargaining for reversal','Denial of the diagnosis'],answer:0,rationales:['Correct — sleep change, low energy, and loss of motivation fit depression.','Incorrect — anger would sound more blaming and outwardly resentful.','Incorrect — bargaining would involve negotiation language.','Incorrect — denial would center on disbelief.'],trap:'The clue cluster is sadness plus withdrawal, not protest or disbelief.'},
+ {id:'Q150',topic:'Stages of Grief',difficulty:'Challenging',related:['F50'],stem:'Which statement best reflects acceptance rather than the other grief stages?',options:['“I know this is real, and I can begin planning now.”','“No, they mixed up my test with someone else’s.”','“Why did this happen to me and not someone else?”','“If I am perfect from now on, maybe this can be undone.”'],answer:0,rationales:['Correct — recognition of reality and forward planning indicate acceptance.','Incorrect — disbelief indicates denial.','Incorrect — resentment indicates anger.','Incorrect — negotiation indicates bargaining.'],trap:'Acceptance is calm acknowledgment, not cheerful denial of pain.'},
+ {id:'Q151',topic:'Growth & Development Milestones',difficulty:'Moderate',related:['F51'],stem:'Which developmental event usually occurs before independent walking?',options:['Pulling to stand and cruising','Speaking in full clear sentences','Starting puberty-related changes','Writing a complete name'],answer:0,rationales:['Correct — pulling to stand and cruising are standard precursors to walking.','Incorrect — full clear sentences appear far later than infant walking.','Incorrect — puberty changes occur years later.','Incorrect — name writing is a school-age skill.'],trap:'Compare ages before answering; only one option belongs to infancy.'},
+ {id:'Q152',topic:'Growth & Development Milestones',difficulty:'Moderate',related:['F52'],stem:'Picking up a small item neatly with thumb and forefinger most strongly indicates which development?',options:['Fine-motor pincer grasp','Full bladder sphincter control','Concrete operational reasoning','Advanced adolescent growth'],answer:0,rationales:['Correct — thumb-and-forefinger pickup is the classic pincer-grasp clue.','Incorrect — bladder control is a separate developmental area.','Incorrect — concrete operational reasoning is a school-age cognitive concept.','Incorrect — adolescent growth is unrelated to the fine-motor clue.'],trap:'The stem describes hand function, so avoid age-irrelevant distractors.'},
+ {id:'Q153',topic:'Growth & Development Milestones',difficulty:'Moderate',related:['F53'],stem:'Which language pattern most strongly fits a toddler?',options:['Using short two-word phrases','Explaining abstract causes clearly','Reading fluently without support','Debating identity and future roles'],answer:0,rationales:['Correct — simple two-word phrases fit toddler language development.','Incorrect — abstract explanation is more advanced than toddler ability.','Incorrect — fluent reading is much later.','Incorrect — identity exploration belongs to adolescence.'],trap:'Use the developmental age clue hidden inside the language pattern.'},
+ {id:'Q154',topic:'Growth & Development Milestones',difficulty:'Challenging',related:['F54'],stem:'Which event is usually the earliest hallmark of female puberty?',options:['Breast budding begins first','Menarche starts first','Adult hip widening completes first','Voice lowering occurs first'],answer:0,rationales:['Correct — thelarche, or breast budding, is usually the earliest major sign.','Incorrect — menarche usually comes later in the sequence.','Incorrect — final body-shape changes are later than the earliest hallmark.','Incorrect — voice lowering is not the earliest classic clue in girls.'],trap:'If menstruation appears with breast budding, breast budding is the better “earliest” answer.'},
+ {id:'Q155',topic:'Growth & Development Milestones',difficulty:'Challenging',related:['F55'],stem:'Which change most often appears earliest in male puberty?',options:['Testicular enlargement first','Facial hair becomes dense first','Voice deepens markedly first','Adult musculature develops first'],answer:0,rationales:['Correct — testicular enlargement is the earliest classic male pubertal sign.','Incorrect — facial hair usually appears later.','Incorrect — voice deepening is later than the earliest gonadal change.','Incorrect — major musculature develops later in the sequence.'],trap:'Early male puberty questions are often testing whether you know gonadal change comes before the obvious later signs.'},
+ {id:'Q156',topic:'Erikson\'s Psychosocial Stages',difficulty:'Moderate',related:['F56'],stem:'Which nursing approach best supports Erikson’s trust versus mistrust stage?',options:['Providing reliable and consistent care','Pushing independent role choices','Assigning competitive school tasks','Exploring life legacy and meaning'],answer:0,rationales:['Correct — consistent care builds trust in infancy.','Incorrect — independent role choices fit older developmental stages.','Incorrect — school-task competition fits industry more than trust.','Incorrect — life legacy belongs to much later adulthood.'],trap:'Match the age and psychosocial task before choosing the answer.'},
+ {id:'Q157',topic:'Erikson\'s Psychosocial Stages',difficulty:'Moderate',related:['F57'],stem:'A toddler keeps saying, “Me do it,” while trying to feed herself. Which Erikson stage is most directly represented?',options:['Autonomy versus shame and doubt','Identity versus role confusion','Industry versus inferiority','Intimacy versus isolation'],answer:0,rationales:['Correct — independence and “I can do it” behavior fit autonomy versus shame and doubt.','Incorrect — identity versus role confusion belongs to adolescence.','Incorrect — industry versus inferiority fits the school-age child.','Incorrect — intimacy versus isolation belongs to young adulthood.'],trap:'Toddlers are about autonomy; adolescents are about identity.'},
+ {id:'Q158',topic:'Erikson\'s Psychosocial Stages',difficulty:'Moderate',related:['F58'],stem:'A preschool child invents make-believe games and wants to help with simple tasks. Which Erikson conflict is most relevant?',options:['Initiative versus guilt','Trust versus mistrust','Integrity versus despair','Generativity versus stagnation'],answer:0,rationales:['Correct — imagination and taking initiative fit the preschool task.','Incorrect — trust versus mistrust belongs to infancy.','Incorrect — integrity versus despair belongs to older adulthood.','Incorrect — generativity versus stagnation belongs to middle adulthood.'],trap:'Pretend play and asking to help are preschool clues.'},
+ {id:'Q159',topic:'Erikson\'s Psychosocial Stages',difficulty:'Challenging',related:['F59'],stem:'Which behavior most strongly illustrates industry versus inferiority?',options:['Taking pride in completing a school project','Rejecting reality after a diagnosis','Negotiating for a better outcome','Seeking a romantic life partner'],answer:0,rationales:['Correct — school-task accomplishment and pride fit industry versus inferiority.','Incorrect — rejecting reality is not an Erikson industry clue.','Incorrect — negotiation is not the psychosocial task tested here.','Incorrect — forming intimate partnership belongs to a later Erikson stage.'],trap:'Industry questions revolve around work, skill, school, and competence.'},
+ {id:'Q160',topic:'Erikson\'s Psychosocial Stages',difficulty:'Challenging',related:['F60'],stem:'Exploring future roles, values, and peer identity most directly reflects which Erikson stage?',options:['Identity versus role confusion','Autonomy versus shame and doubt','Initiative versus guilt','Integrity versus despair'],answer:0,rationales:['Correct — role exploration and self-definition define identity versus role confusion.','Incorrect — autonomy versus shame belongs to toddlerhood.','Incorrect — initiative versus guilt belongs to preschool years.','Incorrect — integrity versus despair belongs to later life.'],trap:'When the clue sounds like “Who am I?” think adolescence and identity.'},
+ {id:'Q161',topic:'Scheduling Systems',difficulty:'Moderate',related:['F61'],stem:'Which scheduling system places several patients into the same block and often sees them in arrival order?',options:['Wave scheduling format','Stream scheduling format','Clustering appointment format','Open-access referral format'],answer:0,rationales:['Correct — multiple patients at one time block seen by arrival order describe wave scheduling.','Incorrect — stream scheduling uses more exact individual times.','Incorrect — clustering groups similar visit types, not mainly shared-time arrival flow.','Incorrect — referral access is not the scheduling pattern tested here.'],trap:'The controlling clue is same block plus arrival order.'},
+ {id:'Q162',topic:'Scheduling Systems',difficulty:'Moderate',related:['F62'],stem:'A provider intentionally leaves time later in the hour to catch up after seeing a small wave of patients early. Which pattern is this?',options:['Modified wave scheduling','Pure stream scheduling','Categorical clustering','Telephone triage scheduling'],answer:0,rationales:['Correct — built-in catch-up time is a modified-wave clue.','Incorrect — stream scheduling is more one-by-one without the wave pattern.','Incorrect — clustering is about similar visit types, not catch-up spacing.','Incorrect — telephone triage is unrelated to this scheduling design.'],trap:'Catch-up time is the phrase that points you to modified wave.'},
+ {id:'Q163',topic:'Scheduling Systems',difficulty:'Challenging',related:['F63'],stem:'A clinic groups all routine blood-pressure checks together in one part of the day. Which appointment strategy is most directly shown?',options:['Clustering by similar service','Wave scheduling by shared time','Modified wave with catch-up','Random open-book scheduling'],answer:0,rationales:['Correct — grouping similar services together describes clustering.','Incorrect — wave focuses on several patients sharing a time block.','Incorrect — modified wave focuses on spacing and catch-up.','Incorrect — open-book scheduling is not the defining clue here.'],trap:'Grouping by visit type is the key phrase for clustering.'}
+];
+
+EXTRA_FLASHCARDS.forEach(c=>FLASHCARDS.push(c));
+EXTRA_QUESTIONS.forEach(q=>QUESTIONS.push(q));
+Object.assign(MODULES, {
+  "Maslow's Hierarchy": {count: 5, cards: ['F41','F42','F43','F44','F45']},
+  "Stages of Grief": {count: 5, cards: ['F46','F47','F48','F49','F50']},
+  'Growth & Development Milestones': {count: 5, cards: ['F51','F52','F53','F54','F55']},
+  "Erikson's Psychosocial Stages": {count: 5, cards: ['F56','F57','F58','F59','F60']},
+  'Scheduling Systems': {count: 3, cards: ['F61','F62','F63']}
+});
+
+
+
+/* Adult Erikson stages added after review */
+const ADULT_ERIKSON_FLASHCARDS = [
+ {id:'F64',category:"Erikson's Psychosocial Stages",title:'Young Adulthood: Intimacy vs Isolation',icon:'💞',accent:'#8B5CF6',accent2:'#EDE9FE',front:'Young adulthood centers on intimacy versus isolation. The person works on forming close, committed relationships while maintaining a stable sense of self.',boxes:[['Age clue','Young adulthood.'],['Positive direction','Intimacy: close relationships, commitment, emotional connection, partnership.'],['If unmet','Isolation: difficulty forming close bonds or avoiding meaningful connection.'],['Test clue','Look for words like committed relationship, closeness, partnership, loneliness, or isolation.']],q:'A young adult says, “I want a close committed relationship, but I keep avoiding emotional closeness.” Which Erikson conflict is most relevant?',options:['Integrity versus despair','Intimacy versus isolation','Industry versus inferiority','Generativity versus stagnation'],answer:1,why:['Incorrect — integrity versus despair belongs to older adulthood and life review.','Correct — closeness versus emotional isolation is the central young-adult conflict.','Incorrect — industry versus inferiority belongs to the school-age child.','Incorrect — generativity versus stagnation belongs to middle adulthood.']},
+ {id:'F65',category:"Erikson's Psychosocial Stages",title:'Middle Adulthood: Generativity vs Stagnation',icon:'🌱',accent:'#00D5A3',accent2:'#C9FFF3',front:'Middle adulthood centers on generativity versus stagnation. The person often seeks to contribute, mentor, parent, guide, build, or give back.',boxes:[['Age clue','Middle adulthood.'],['Positive direction','Generativity: contribution, mentoring, parenting, productivity, guidance.'],['If unmet','Stagnation: feeling unproductive, disconnected, or stuck.'],['Test clue','Look for mentoring, raising children, guiding younger people, work contribution, or giving back.']],q:'A middle-aged adult says, “I want to mentor newer staff and feel that my work contributes to others.” Which Erikson stage fits best?',options:['Trust versus mistrust','Identity versus role confusion','Generativity versus stagnation','Autonomy versus shame and doubt'],answer:2,why:['Incorrect — trust versus mistrust belongs to infancy.','Incorrect — identity versus role confusion belongs to adolescence.','Correct — mentoring and contribution are classic generativity clues.','Incorrect — autonomy versus shame and doubt belongs to toddlerhood.']},
+ {id:'F66',category:"Erikson's Psychosocial Stages",title:'Older Adulthood: Integrity vs Despair',icon:'🕰️',accent:'#007AC0',accent2:'#D6F3FF',front:'Older adulthood centers on integrity versus despair. The person looks back on life and either finds meaning and acceptance or feels regret and bitterness.',boxes:[['Age clue','Older adulthood.'],['Positive direction','Integrity: peace, acceptance, meaning, life review without deep regret.'],['If unmet','Despair: regret, bitterness, hopelessness, fear that life was wasted.'],['Test clue','Look for life review, reflection, regret, acceptance, peace, or despair.']],q:'An older adult reflects on life and says, “I made mistakes, but overall I feel my life had meaning.” Which Erikson outcome is shown?',options:['Initiative','Integrity','Autonomy','Isolation'],answer:1,why:['Incorrect — initiative belongs to preschool development.','Correct — peaceful life review and meaning reflect integrity.','Incorrect — autonomy belongs to toddler development.','Incorrect — isolation is the negative outcome of young adulthood.']}
+];
+const ADULT_ERIKSON_QUESTIONS = [
+ {id:'Q164',topic:"Erikson's Psychosocial Stages",difficulty:'Moderate',related:['F64'],stem:'Which statement best reflects the young-adult Erikson task?',options:['“I want a close committed relationship.”','“I want to finish my school project.”','“I want to look back with peace.”','“I want to choose my own shirt.”'],answer:0,rationales:['Correct — committed closeness reflects intimacy versus isolation.','Incorrect — school project success reflects industry versus inferiority.','Incorrect — life review reflects integrity versus despair.','Incorrect — simple independence choices reflect autonomy versus shame and doubt.'],trap:'Young adulthood is about intimacy and isolation, not school skills or life review.'},
+ {id:'Q165',topic:"Erikson's Psychosocial Stages",difficulty:'Challenging',related:['F65'],stem:'A middle-aged adult feels fulfilled by mentoring younger workers and contributing to the community. Which Erikson concept is most directly shown?',options:['Autonomy','Generativity','Identity','Integrity'],answer:1,rationales:['Incorrect — autonomy is the toddler task of independence.','Correct — mentoring, guiding, and contributing reflect generativity.','Incorrect — identity is the adolescent task of role formation.','Incorrect — integrity is the older-adult task of life review.'],trap:'Mentoring and contribution point to middle adulthood.'},
+ {id:'Q166',topic:"Erikson's Psychosocial Stages",difficulty:'Challenging',related:['F66'],stem:'An older adult says, “I regret everything and feel my life was wasted.” Which negative Erikson outcome is most likely?',options:['Mistrust','Inferiority','Despair','Guilt'],answer:2,rationales:['Incorrect — mistrust is the negative outcome of infancy.','Incorrect — inferiority is the negative outcome of school-age development.','Correct — regret and a sense of wasted life reflect despair in older adulthood.','Incorrect — guilt is the negative outcome of preschool initiative conflict.'],trap:'Older adult plus life review points to integrity versus despair.'}
+];
+ADULT_ERIKSON_FLASHCARDS.forEach(c=>FLASHCARDS.push(c));
+ADULT_ERIKSON_QUESTIONS.forEach(q=>QUESTIONS.push(q));
+if(MODULES["Erikson's Psychosocial Stages"]){
+  MODULES["Erikson's Psychosocial Stages"].cards = ['F56','F57','F58','F59','F60','F64','F65','F66'];
+  MODULES["Erikson's Psychosocial Stages"].count = 8;
+}
+
+/* === Anti-gaming answer-position balancer ===
+   Keeps each correct answer/rationale matched while rotating the correct option across A/B/C/D.
+   This affects flashcard concept-checks and the practice/challenge bank. */
+function rebalanceAnswerPositions(items, pattern){
+  items.forEach((item, idx)=>{
+    if(!item || !Array.isArray(item.options) || item.options.length !== 4) return;
+    const current = Number(item.answer);
+    if(!Number.isInteger(current) || current < 0 || current > 3) return;
+    const target = pattern[idx % pattern.length];
+
+    const oldOptions = item.options.slice();
+    const oldWhy = (item.why || item.rationales || []).slice();
+    const correctOption = oldOptions[current];
+    const correctWhy = oldWhy[current] || 'Correct. This option best matches the controlling clue.';
+    const otherIndexes = [0,1,2,3].filter(i=>i!==current);
+
+    const newOptions = new Array(4);
+    const newWhy = new Array(4);
+    newOptions[target] = correctOption;
+    newWhy[target] = correctWhy;
+
+    let fillSlots = [0,1,2,3].filter(i=>i!==target);
+    fillSlots.forEach((slot, n)=>{
+      const oldIndex = otherIndexes[n];
+      newOptions[slot] = oldOptions[oldIndex];
+      newWhy[slot] = oldWhy[oldIndex] || 'Incorrect. This choice does not match the controlling clue in the question.';
+    });
+
+    item.options = newOptions;
+    item.answer = target;
+    if(item.why) item.why = newWhy;
+    if(item.rationales) item.rationales = newWhy;
+  });
+}
+rebalanceAnswerPositions(FLASHCARDS, [1,2,3,0,2,1,3,0]);
+rebalanceAnswerPositions(QUESTIONS, [2,0,3,1,2,1,0,3]);
+
 let state = JSON.parse(localStorage.getItem('ccmaState')||'{}');
 state.answers ||= {practice:{}, challenge:{}}; state.flags ||= {practice:[], challenge:[]}; state.understood ||= []; state.collected ||= []; state.challengeStart ||= null;
 let currentFlash=0, currentPractice=0, currentChallenge=0, challengeTimer=null;
@@ -120,6 +736,65 @@ Recommended Next Steps:
 function copyReport(){const r=generateReport(); navigator.clipboard?.writeText(r).then(()=>showToast('Report copied.')).catch(()=>showToast('Report generated.'))}
 function resetAll(){if(confirm('Reset all progress?')){localStorage.removeItem('ccmaState');location.reload();}}
 function renderAll(){renderDashboard();renderFlash();renderPractice();renderChallenge();renderDiagrams();renderAnalytics();renderCollectBox();if(state.report&&$('reportBox'))$('reportBox').textContent=state.report;renderMaps();}
+
+const maslowLevels = [
+ ['Self-Actualization','Growth, purpose, creativity, becoming one’s fullest self.','On tests, this sounds like life goals, meaning, mentoring, creativity, or fulfillment after lower needs are stable.','#23C704','#B9E946','🌟'],
+ ['Esteem','Confidence, independence, achievement, dignity.','On tests, this sounds like wanting to do self-care alone, rebuild confidence, or feel useful again.','#00D5A3','#24F6FC','🏆'],
+ ['Love / Belonging','Connection, affection, family, being included.','On tests, this sounds like loneliness, wanting visitors, missing family, or needing peer support.','#FFCD00','#FFF504','💛'],
+ ['Safety / Security','Protection from harm, stability, shelter, fall prevention.','On tests, this sounds like infection prevention, safe environment, medication safety, or injury prevention.','#FE5300','#FF7B6B','🛡️'],
+ ['Physiological','Airway, breathing, circulation, food, fluids, pain control, sleep.','On tests, this sounds like oxygenation, severe pain, bleeding, nutrition, hydration, elimination, or rest.','#00A9C0','#24F6FC','🫁']
+];
+const griefLevels = [
+ ['Denial','“This cannot be happening.”','Look for disbelief, minimizing, or insisting the diagnosis or loss is not real.','#FF2534','#FF7B6B','🚫'],
+ ['Anger','“Why did this happen to me?”','Look for blame, resentment, irritability, or protest.','#FE5300','#FFB000','🔥'],
+ ['Bargaining','“If I do this, maybe it will change.”','Look for negotiation language such as if only, what if, or I promise.','#FFCD00','#FFF504','🤝'],
+ ['Depression','“I feel heavy, tired, and unmotivated.”','Look for sadness, poor sleep, low energy, and withdrawal.','#00A9C0','#24F6FC','🌧️'],
+ ['Acceptance','“I know it is real, and I can move forward.”','Look for acknowledgment of reality and practical planning.','#23C704','#9DF6FE','🌱']
+];
+const milestoneBlocks = [
+ {title:'Infant gross-motor order',icon:'👶',color1:'#FE47CF',color2:'#24F6FC',points:['Head control','Rolls over','Sits with support','Sits alone','Crawls','Pulls to stand','Cruises','Walks'],tip:'When two choices compete, the more basic trunk or head control skill usually comes earlier.',trap:'Do not put walking before cruising or pulling to stand. Head and trunk control come before big movement.'},
+ {title:'Fine-motor and social clues',icon:'🧸',color1:'#FFCD00',color2:'#B9E946',points:['Social smile early','Purposeful grasp develops','Transfers objects hand to hand','Pincer grasp later in infancy','Stranger awareness increases'],tip:'Thumb + forefinger = pincer grasp. Do not confuse reflex grasp with purposeful fine-motor control.',trap:'The pincer grasp is a tiny-object clue. It is not the same as the newborn reflex grasp.'},
+ {title:'Toddler / preschool language',icon:'🗨️',color1:'#00D5A3',color2:'#9DF6FE',points:['Single words first','Two-word phrases in toddlerhood','Many “why” questions in preschool','Longer sentences and pretend play language'],tip:'Two-word phrases usually signal toddler development. Storytelling and fuller sentences point later.',trap:'A toddler is not expected to reason abstractly or give long explanations.'},
+ {title:'Female puberty order',icon:'🌸',color1:'#FE47CF',color2:'#FFF0F5',points:['Breast budding often earliest','Pubic hair growth','Growth spurt progression','Menarche later rather than first'],tip:'A classic test trap is putting menstruation before breast development. Breast budding usually comes first.',trap:'Menarche is memorable, but it is not usually the first sign.'},
+ {title:'Male puberty order',icon:'⚡',color1:'#007AC0',color2:'#24F6FC',points:['Testicular enlargement first','Pubic hair growth','Penile growth','Growth spurt','Later facial hair and deeper voice'],tip:'A classic test trap is choosing facial hair or voice change as the earliest sign. Think gonads before beard.',trap:'The obvious changes, like facial hair and deep voice, usually appear later.'}
+];
+const eriksonRows = [
+ ['Infancy','Trust vs mistrust','Reliable feeding, soothing, and comfort build trust.','Inconsistent care can foster mistrust and insecurity.','#FF7B6B','#FFE0D8','🤱'],
+ ['Toddler','Autonomy vs shame and doubt','Choices, toilet training, and “I can do it” support autonomy.','Overcontrol or ridicule can produce shame and doubt.','#FFCD00','#FFF5B8','🚽'],
+ ['Preschool','Initiative vs guilt','Pretend play, trying, planning, and helping support initiative.','Harsh punishment can make the child feel guilty for acting.','#23C704','#CFFFCB','🎨'],
+ ['School age','Industry vs inferiority','Projects, skills, and doing a job well support industry.','Repeated failure or criticism can create inferiority.','#00A9C0','#C8F8FF','📘'],
+ ['Adolescence','Identity vs role confusion','Exploring values, roles, and peer identity supports a stable self.','Unclear role exploration can produce role confusion.','#FE47CF','#FFD6F4','🪞'],
+ ['Young adulthood','Intimacy vs isolation','Close relationships, commitment, and emotional connection support intimacy.','Avoiding closeness or being unable to form bonds can lead to isolation.','#8B5CF6','#EDE9FE','💞'],
+ ['Middle adulthood','Generativity vs stagnation','Guiding others, parenting, mentoring, productivity, and contribution support generativity.','Feeling unproductive, disconnected, or without contribution can lead to stagnation.','#00D5A3','#C9FFF3','🌱'],
+ ['Older adulthood','Integrity vs despair','Looking back with acceptance, meaning, and peace supports integrity.','Looking back with regret, bitterness, or hopelessness can lead to despair.','#007AC0','#D6F3FF','🕰️']
+];
+const schedulingCards = [
+ {title:'Wave scheduling',icon:'🌊',c1:'#FE47CF',c2:'#FF7B6B',bullets:['Several patients booked in the same block','Often three or four within a half hour','Patients often seen in arrival order'],exam:'If the stem says multiple patients are booked at 9:00 and are seen as they arrive, think wave scheduling.',example:'Example: Three patients are scheduled for 9:00 AM. The first patient who arrives is roomed first, then the next, then the next.'},
+ {title:'Modified wave',icon:'🧭',c1:'#FE5300',c2:'#FFCD00',bullets:['A small wave starts the hour','Later space is left for catch-up','Helps absorb delays'],exam:'If the stem mentions catch-up time later in the hour, modified wave is the better answer.',example:'Example: Two patients are scheduled at 9:00, one at 9:20, and the last part of the hour is left open so the provider can catch up.'},
+ {title:'Stream scheduling',icon:'➡️',c1:'#24F6FC',c2:'#00A9C0',bullets:['Each patient receives an individual time slot','Visits move in a more even sequence','Less “same time” crowding'],exam:'If the clue is specific appointment times rather than shared blocks, think stream scheduling.',example:'Example: One patient is scheduled at 9:00, the next at 9:15, the next at 9:30, and the next at 9:45.'},
+ {title:'Clustering',icon:'🧩',c1:'#B9E946',c2:'#23C704',bullets:['Similar visit types are grouped together','Examples: physicals, injections, or follow-ups','Useful for workflow efficiency'],exam:'If the clue is “all allergy shots together” or “all physicals together,” think clustering.',example:'Example: The office schedules all vaccine visits in the morning and all annual physicals in the afternoon.'}
+];
+function showMemoryPanel(id,btn){document.querySelectorAll('.memory-panel').forEach(p=>p.classList.remove('active')); const panel=$('memory-'+id); if(panel){panel.classList.add('active'); setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),60);} document.querySelectorAll('.memory-tab').forEach(b=>{const active=b.dataset.memory===id; b.classList.toggle('active',active); b.setAttribute('aria-selected',active?'true':'false');}); if(btn) btn.classList.add('active');}
+function toggleMemoryFlip(el){el.classList.toggle('flipped')}
+function renderMemoryLabs(){
+  const mp=$('maslowPyramid');
+  if(mp) mp.innerHTML=maslowLevels.map((x,i)=>`<div class="pyramid-level level-${i+1}" onclick="toggleMemoryFlip(this)" role="button" tabindex="0"><div class="memory-flip"><div class="pyramid-face pyramid-front" style="background:linear-gradient(135deg,${x[3]},${x[4]})"><div class="big-memory-icon">${x[5]}</div><b style="font-size:24px">${x[0]}</b><span style="margin-top:7px">${x[1]}</span><span class="mini-note">Click this level to flip</span></div><div class="pyramid-face pyramid-back" style="background:linear-gradient(135deg,${x[4]},#ffffff)"><div class="big-memory-icon">🧪</div><b style="font-size:21px">Test context</b><p style="margin:8px 0 0">${x[2]}</p><span class="mini-note">Click again to return</span></div></div></div>`).join('');
+
+  const gc=$('griefClouds');
+  if(gc) gc.innerHTML=griefLevels.map((x)=>`<div class="cloud-card" onclick="toggleMemoryFlip(this)" role="button" tabindex="0"><div class="memory-flip"><div class="pyramid-face cloud-shape" style="background:linear-gradient(135deg,${x[3]},${x[4]})"><div class="big-memory-icon">${x[5]}</div><b style="font-size:27px">${x[0]}</b><p style="margin:8px 0 0;font-weight:850">${x[1]}</p><span class="mini-note">Click the cloud</span></div><div class="pyramid-face pyramid-back cloud-shape" style="background:linear-gradient(135deg,${x[4]},#ffffff)"><div class="big-memory-icon">🧠</div><b style="font-size:21px">How it shows up</b><p style="margin:8px 0 0">${x[2]}</p><span class="mini-note">Click again</span></div></div></div>`).join('');
+
+  const ma=$('milestoneArea');
+  if(ma) ma.innerHTML=milestoneBlocks.map(b=>`<div class="milestone-card flip-card" onclick="toggleMemoryFlip(this)" role="button" tabindex="0"><div class="memory-flip"><div class="flip-face flip-front" style="background:linear-gradient(135deg,${b.color1},${b.color2})"><div class="big-memory-icon">${b.icon}</div><h4>${b.title}</h4><div class="order-chip-row">${b.points.map((p,i)=>`<span class="order-chip">${i+1}. ${p}</span>`).join('')}</div><span class="mini-note">Click to see the exam trap</span></div><div class="flip-face flip-back"><div class="big-memory-icon">🎯</div><h4>${b.title}: test clue</h4><p><b>Exam tip:</b> ${b.tip}</p><p><b>Common trap:</b> ${b.trap}</p><span class="mini-note">Click again to return</span></div></div></div>`).join('');
+
+  const ec=$('eriksonChart');
+  if(ec) ec.innerHTML=eriksonRows.map(r=>`<div class="erikson-row" style="--rowStrong:${r[4]};--rowSoft:${r[5]}"><div class="erikson-cell stage-cell"><div class="big-memory-icon">${r[6]}</div><b>${r[0]}</b></div><div class="erikson-cell conflict-cell"><b>${r[1]}</b><br><span class="mini-note">Conflict</span></div><div class="erikson-cell positive-cell"><b>Positive direction:</b><br>${r[2]}</div><div class="erikson-cell risk-cell"><b>If unmet:</b><br>${r[3]}</div></div>`).join('');
+
+  const sa=$('scheduleArea');
+  if(sa) sa.innerHTML=schedulingCards.map(s=>`<div class="schedule-card flip-card" onclick="toggleMemoryFlip(this)" role="button" tabindex="0"><div class="memory-flip"><div class="flip-face flip-front" style="background:linear-gradient(135deg,${s.c1},${s.c2})"><div class="big-memory-icon">${s.icon}</div><h4>${s.title}</h4><div class="order-chip-row">${s.bullets.map(b=>`<span class="order-chip">${b}</span>`).join('')}</div><span class="mini-note">Click to see the clue</span></div><div class="flip-face flip-back"><div class="big-memory-icon">🔎</div><h4>${s.title}: exam clue</h4><p><b>Exam clue:</b> ${s.exam}</p><p><b>Example:</b> ${s.example}</p><span class="mini-note">Click again to return</span></div></div></div>`).join('');
+}
+
+function renderAll(){renderDashboard();renderFlash();renderPractice();renderChallenge();renderDiagrams();renderMemoryLabs();renderAnalytics();renderCollectBox();if(state.report&&$('reportBox'))$('reportBox').textContent=state.report;renderMaps();}
+
 renderAll(); if(state.challengeStart) challengeTimer=setInterval(renderTimer,1000);
 </script>
 </body>
